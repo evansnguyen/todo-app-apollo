@@ -11,6 +11,7 @@ export enum AuthStatus {
 export interface IAuth {
   sessionInfo?: { username?: string; email?: string; sub?: string; accessToken?: string; refreshToken?: string }
   attrInfo?: any
+  currentUser?: string
   authStatus?: AuthStatus
   signInWithEmail?: any
   signUpWithEmail?: any
@@ -51,6 +52,7 @@ const AuthProvider = ({ children }: Props) => {
   const [authStatus, setAuthStatus] = useState(AuthStatus.Loading)
   const [sessionInfo, setSessionInfo] = useState({})
   const [attrInfo, setAttrInfo] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     async function getSessionInfo() {
@@ -62,9 +64,11 @@ const AuthProvider = ({ children }: Props) => {
         })
         window.localStorage.setItem('accessToken', `${session.accessToken.jwtToken}`)
         window.localStorage.setItem('refreshToken', `${session.refreshToken.token}`)
-        await setAttribute({ Name: 'website', Value: 'https://github.com/dbroadhurst/aws-cognito-react' })
+        // await setAttribute({ Name: 'website', Value: 'todo-app-playground' })
         const attr: any = await getAttributes()
         setAttrInfo(attr)
+        const user: string = await getCurrentUser()
+        setCurrentUser(user)
         setAuthStatus(AuthStatus.SignedIn)
       } catch (err) {
         setAuthStatus(AuthStatus.SignedOut)
@@ -117,6 +121,15 @@ const AuthProvider = ({ children }: Props) => {
     }
   }
 
+  async function getCurrentUser() {
+    try {
+      const user = await cognito.getCurrentUser()
+      return user
+    } catch (err) {
+      throw err
+    }
+  }
+
   async function getAttributes() {
     try {
       const attr = await cognito.getAttributes()
@@ -163,6 +176,7 @@ const AuthProvider = ({ children }: Props) => {
     authStatus,
     sessionInfo,
     attrInfo,
+    currentUser,
     signUpWithEmail,
     signInWithEmail,
     signOut,

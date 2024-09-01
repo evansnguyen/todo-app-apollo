@@ -4,6 +4,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {CssBaseline} from "@mui/material";
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import AuthProvider, {AuthIsNotSignedIn, AuthIsSignedIn} from "./contexts/authContext.tsx";
+import GlobalProvider from "./contexts/globalProvider.tsx";
 import ChangePassword from "./routes/auth/changePassword.tsx";
 import SignIn from "./routes/auth/signIn.tsx";
 import SignUp from "./routes/auth/signUp.tsx";
@@ -11,6 +12,7 @@ import VerifyCode from "./routes/auth/verify.tsx";
 import RequestCode from "./routes/auth/requestCode.tsx";
 import ForgotPassword from "./routes/auth/forgotPassword.tsx";
 import Landing from "./routes/landing/landing.tsx";
+import {Toaster} from "react-hot-toast";
 
 const lightTheme = createTheme({
     colorSchemes: {
@@ -48,7 +50,10 @@ function App() {
         <CssBaseline/>
         <AuthProvider>
             <AuthIsSignedIn>
-                <MainRoute/>
+                <GlobalProvider>
+                    <Toaster/>
+                    <MainRoute/>
+                </GlobalProvider>
             </AuthIsSignedIn>
             <AuthIsNotSignedIn>
                 <SignInRoute/>
