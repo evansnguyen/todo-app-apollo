@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-todoapollographql-dev-4cb57-authRole",
+      "UnauthRoleArn": "arn:aws:iam::302263083994:role/amplify-todoapollographql-dev-4cb57-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::302263083994:role/amplify-todoapollographql-dev-4cb57-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-todoapollographql-dev-4cb57-deployment",
+      "UnauthRoleName": "amplify-todoapollographql-dev-4cb57-unauthRole",
+      "StackName": "amplify-todoapollographql-dev-4cb57",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:302263083994:stack/amplify-todoapollographql-dev-4cb57/3a88dd60-6882-11ef-92c4-063b8234c59b",
+      "AmplifyAppId": "d1nwnmarltkylo"
+    },
+    "categories": {
+      "api": {
+        "todoapollographql": {}
+      }
+    }
+  }
+}
