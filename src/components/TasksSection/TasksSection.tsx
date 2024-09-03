@@ -1,10 +1,15 @@
 import {Box, Card, CardContent, Fab, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import {useGlobalState} from "../../contexts/globalProvider.tsx";
+import TaskModal from "../TaskModal/TaskModal.tsx";
 
 const TasksSection = () => {
+    const { modal, openModal } = useGlobalState();
 
     return (
         <Box sx={{p: 3}}>
+            {modal && <TaskModal />}
+
             {/* Header Section */}
             <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Typography variant="h5" sx={{fontWeight: 'bold'}}>
@@ -25,7 +30,9 @@ const TasksSection = () => {
                 '&:hover': {
                     backgroundColor: '#D0D0D0', // Darker grey on hover
                 },
-            }}>
+            }}
+            onClick={openModal}
+            >
                 <CardContent sx={{textAlign: 'center'}}>
                     <AddIcon sx={{fontSize: 40, mb: 2}}/>
                     <Typography variant="h6">
@@ -45,6 +52,7 @@ const TasksSection = () => {
                     backgroundColor: '#2ecc71',
                     '&:hover': {backgroundColor: '#27ae60'},
                 }}
+                onClick={openModal}
             >
                 <AddIcon/>
             </Fab>

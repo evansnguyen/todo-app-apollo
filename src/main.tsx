@@ -6,18 +6,16 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {Amplify} from 'aws-amplify';
+import config from './amplifyconfiguration.json';
+import {AmplifyClientProvider} from './contexts/amplifyClientContext.tsx';
 
-
-const client = new ApolloClient({
-    uri: 'https://flyby-router-demo.herokuapp.com/',
-    cache: new InMemoryCache(),
-});
+Amplify.configure(config);
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <ApolloProvider client={client}>
+        <AmplifyClientProvider>
             <App/>
-        </ApolloProvider>
+        </AmplifyClientProvider>
     </StrictMode>,
 )

@@ -56,7 +56,7 @@ function Sidebar() {
             <Toolbar />
             <Divider />
             <List>
-                <ListItem button onClick={collapseMenu}>
+                <ListItem onClick={collapseMenu}>
                     <ListItemIcon>
                         {!collapsed ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </ListItemIcon>
@@ -65,7 +65,7 @@ function Sidebar() {
                 {menu.map((item) => {
                     const link = item.link;
                     return (
-                        <ListItem button key={item.id} onClick={() => {
+                        <ListItem key={item.id} onClick={() => {
                             handleClick(link);
                         }}>
                             <ListItemIcon>
@@ -79,7 +79,7 @@ function Sidebar() {
             <Box sx={{ flexGrow: 1 }} />
             <Divider />
             <List>
-                <ListItem button onClick={signOutClicked}>
+                <ListItem onClick={signOutClicked}>
                     <ListItemIcon>
                         <ExitToAppIcon />
                     </ListItemIcon>
